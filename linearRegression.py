@@ -1,9 +1,7 @@
 import matplotlib.pyplot as plt
 
 def main():
-    plt.figure()
-    plt.show()
-    print("Hello from ft-linear-regression!")
+    print("linear regression")
 
 
 if __name__ == "__main__":
