@@ -6,7 +6,6 @@ def readThetas():
         f.close()
     except Exception:
         return [0, 0]
-    print(thetas)
     return thetas
 
 def priceEstimation(thetas, mileage):
@@ -19,7 +18,7 @@ def main():
     try:
         mileage = input("Please enter a mileage :\n")
         thetas = readThetas()
-        print(f"This car is worth {priceEstimation(thetas, float(mileage))}€")
+        print(f"This car is worth {priceEstimation(thetas, float(mileage)):.2f}€")
     except Exception as e:
         print(f"Error: {e}")
         exit(1)

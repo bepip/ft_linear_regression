@@ -51,7 +51,36 @@ def linear_regression(x_original, y_original):
 
     return theta0, theta1
 
-def draw(theta0, theta1, x, y):
+def main():
+    drawing = False
+    verify = False
+    args = sys.argv[1:]
+    if (len(args) == 1):
+        if(args[0] == "--draw" or args[0] == "-d"):
+            drawing = True
+        else:
+            print("Option(s):\t--draw (-d)")
+            print("\t\t--verify (-v)")
+            exit(1)
+    x_original, y_original = read_axis_from_file("data.csv")
+
+
+    theta0, theta1 = linear_regression(x_original,y_original)
+    print(f"{theta0}, {theta1}")
+    save_data(theta0, theta1)
+    draw(theta0, theta1, x_original, y_original, drawing)
+    verfiy(theta0, theta1, x_original, y_original, verify)
+
+if __name__ == "__main__":
+    main()
+
+def verfiy(theta0_gradient, theta1_gradient, x, y, draw=False, verify=True):
+    if not verify:
+        return
+    # TODO: calculate precise values and compare to theta0 and theta1
+    pass
+
+def draw(theta0, theta1, x, y, draw=False, save=True):
     plt.figure()
     plt.grid()
     plt.title("Price estimation with respect to mileage")
@@ -64,33 +93,18 @@ def draw(theta0, theta1, x, y):
     plt.plot(x_space, y_x, color='red',  label=f"y = {theta1:.2f}x + {theta0:.2f}")
 
     plt.legend()
-    plt.savefig("fig")
-    plt.show()
+    if save:
+        plt.savefig("fig")
+        print(f"Image was successfully created")
+    if draw:
+        plt.show()
 
 def save_data(theta0, theta1, namefile="thetas.csv"):
     try:
         with open(namefile, "w", encoding="utf-8") as f:
-            f.write(f"theta0={theta0},theta1={theta1}\n")
-            print(f"File {namefile} successfully created")
+            f.write(f"{theta0},{theta1}")
+            print(f"File {namefile} was successfully created")
     except Exception as e:
         print(f"Error: {e}")
 
-def main():
-    drawing = False
-    args = sys.argv[1:]
-    if (len(args) == 1):
-        if(args[0] == "--draw" or args[0] == "-d"):
-            drawing = True
-        else:
-            print("Option(s): --draw (-d)")
-            exit(1)
-    x_original, y_original = read_axis_from_file("data.csv")
 
-
-    theta0, theta1 = linear_regression(x_original,y_original)
-    save_data(theta0, theta1)
-    if drawing:
-        draw(theta0, theta1, x_original, y_original)
-
-if __name__ == "__main__":
-    main()
