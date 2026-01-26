@@ -6,6 +6,7 @@ def readThetas():
         f.close()
     except Exception:
         return [0, 0]
+    print(thetas)
     return thetas
 
 def priceEstimation(thetas, mileage):
