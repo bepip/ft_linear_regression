@@ -1,4 +1,4 @@
-def readThetas():
+def read_thetas():
     try:
         f = open("thetas.csv", "r")
         thetas = f.readline().split(',')
@@ -8,7 +8,7 @@ def readThetas():
         return [0, 0]
     return thetas
 
-def priceEstimation(thetas, mileage):
+def price_estimation(thetas, mileage):
     if (mileage < 0):
         raise Exception("Mileage must be positive")
     return thetas[0] + thetas[1] * mileage
@@ -17,8 +17,8 @@ def priceEstimation(thetas, mileage):
 def main():
     try:
         mileage = input("Please enter a mileage :\n")
-        thetas = readThetas()
-        print(f"This car is worth {priceEstimation(thetas, float(mileage)):.2f}€")
+        thetas = read_thetas()
+        print(f"This car is worth {price_estimation(thetas, float(mileage)):.2f}€")
     except Exception as e:
         print(f"Error: {e}")
         exit(1)
